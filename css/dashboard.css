@@ -1,0 +1,942 @@
+/* ================================
+   GLOBAL
+================================ */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Inter, Arial, sans-serif;
+    background: #f8fafc;
+    color: #0f172a;
+    min-height: 100vh;
+}
+
+
+/* ================================
+   SIDEBAR
+================================ */
+
+.sidebar {
+    width: 240px;
+    background: #ffffff;
+    border-right: 1px solid #e5e7eb;
+
+    padding: 25px 18px;
+
+    position: fixed;
+    left: 0;
+    top: 0;
+
+    height: 100vh;
+
+    display: flex;
+    flex-direction: column;
+
+    z-index: 100;
+}
+
+.sidebar-logo {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+
+    font-size: 20px;
+    font-weight: 800;
+
+    margin-bottom: 45px;
+    padding-left: 10px;
+}
+
+.logo-small {
+    width: 38px;
+    height: 38px;
+
+    border-radius: 10px;
+
+    background: #4f46e5;
+    color: #ffffff;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    font-weight: 800;
+}
+
+nav {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.nav-item {
+    display: block;
+
+    padding: 13px 15px;
+
+    border-radius: 10px;
+
+    color: #64748b;
+
+    font-size: 14px;
+    font-weight: 500;
+
+    cursor: pointer;
+
+    text-decoration: none;
+
+    transition: 0.2s ease;
+}
+
+.nav-item:hover {
+    background: #f8fafc;
+    color: #4f46e5;
+}
+
+.nav-item.active {
+    background: #eef2ff;
+    color: #4f46e5;
+    font-weight: 600;
+}
+
+.sidebar-bottom {
+    margin-top: auto;
+}
+
+.logout-btn {
+    width: 100%;
+
+    border: none;
+
+    background: #fee2e2;
+    color: #dc2626;
+
+    padding: 12px;
+
+    border-radius: 10px;
+
+    cursor: pointer;
+
+    font-weight: 600;
+
+    transition: 0.2s ease;
+}
+
+.logout-btn:hover {
+    background: #fecaca;
+}
+
+
+/* ================================
+   MAIN
+================================ */
+
+.main {
+    margin-left: 240px;
+
+    width: calc(100% - 240px);
+
+    padding: 35px;
+
+    max-width: 1600px;
+}
+
+.topbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    margin-bottom: 30px;
+}
+
+.welcome-small {
+    color: #64748b;
+
+    font-size: 14px;
+
+    margin-bottom: 5px;
+}
+
+.topbar h1 {
+    font-size: 30px;
+    font-weight: 700;
+}
+
+.add-btn {
+    background: #4f46e5;
+    color: #ffffff;
+
+    border: none;
+
+    padding: 13px 20px;
+
+    border-radius: 10px;
+
+    cursor: pointer;
+
+    font-weight: 600;
+
+    transition: 0.2s ease;
+}
+
+.add-btn:hover {
+    background: #4338ca;
+
+    transform: translateY(-1px);
+
+    box-shadow:
+        0 6px 15px rgba(79, 70, 229, 0.2);
+}
+
+
+/* ================================
+   STAT CARDS
+================================ */
+
+.stats {
+    display: grid;
+
+    grid-template-columns: repeat(4, 1fr);
+
+    gap: 18px;
+
+    margin-bottom: 22px;
+}
+
+.stat-card {
+    background: #ffffff;
+
+    border: 1px solid #e5e7eb;
+
+    border-radius: 16px;
+
+    padding: 22px;
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 15px;
+
+    transition: 0.2s ease;
+}
+
+.stat-card:hover {
+    transform: translateY(-2px);
+
+    box-shadow:
+        0 8px 25px rgba(15, 23, 42, 0.06);
+}
+
+.stat-icon {
+    width: 45px;
+    height: 45px;
+
+    flex-shrink: 0;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    background: #eef2ff;
+
+    color: #4f46e5;
+
+    border-radius: 12px;
+
+    font-weight: 800;
+}
+
+.stat-card p {
+    color: #64748b;
+
+    font-size: 13px;
+
+    margin-bottom: 5px;
+}
+
+.stat-card h2 {
+    font-size: 22px;
+    font-weight: 700;
+}
+
+
+/* ================================
+   DASHBOARD PANELS
+================================ */
+
+.dashboard-grid {
+    display: grid;
+
+    grid-template-columns: 1.5fr 1fr;
+
+    gap: 20px;
+
+    margin-bottom: 22px;
+}
+
+.panel {
+    background: #ffffff;
+
+    border: 1px solid #e5e7eb;
+
+    border-radius: 16px;
+
+    padding: 24px;
+}
+
+.panel-header {
+    display: flex;
+
+    justify-content: space-between;
+
+    align-items: center;
+
+    margin-bottom: 22px;
+}
+
+.panel-header h2 {
+    font-size: 18px;
+
+    margin-bottom: 4px;
+}
+
+.panel-header p {
+    font-size: 13px;
+
+    color: #64748b;
+}
+
+
+/* ================================
+   CHART
+================================ */
+
+.chart-panel {
+    min-height: 330px;
+}
+
+#expenseChart {
+    width: 100% !important;
+    max-height: 260px;
+}
+
+
+/* ================================
+   CATEGORY
+================================ */
+
+.category-item {
+    margin-bottom: 20px;
+}
+
+.category-top {
+    display: flex;
+
+    justify-content: space-between;
+
+    margin-bottom: 8px;
+
+    font-size: 14px;
+}
+
+.progress {
+    width: 100%;
+
+    height: 7px;
+
+    background: #e5e7eb;
+
+    border-radius: 10px;
+
+    overflow: hidden;
+}
+
+.progress div {
+    height: 100%;
+
+    background: #4f46e5;
+
+    border-radius: 10px;
+}
+
+
+/* ================================
+   SUBSCRIPTIONS TABLE
+================================ */
+
+.subscriptions-panel {
+    overflow: hidden;
+}
+
+#searchInput {
+    width: 200px;
+
+    padding: 9px 12px;
+
+    border: 1px solid #dbe1ea;
+
+    border-radius: 8px;
+
+    outline: none;
+
+    font-family: inherit;
+
+    font-size: 14px;
+}
+
+#searchInput:focus {
+    border-color: #4f46e5;
+
+    box-shadow:
+        0 0 0 3px rgba(79, 70, 229, 0.1);
+}
+
+.table-container {
+    width: 100%;
+
+    overflow-x: auto;
+}
+
+table {
+    width: 100%;
+
+    border-collapse: collapse;
+
+    min-width: 850px;
+}
+
+th {
+    text-align: left;
+
+    color: #64748b;
+
+    font-size: 12px;
+    font-weight: 600;
+
+    padding: 14px;
+
+    background: #f8fafc;
+}
+
+td {
+    padding: 15px 14px;
+
+    border-bottom: 1px solid #f1f5f9;
+
+    font-size: 14px;
+}
+
+tr:last-child td {
+    border-bottom: none;
+}
+
+.sub-name {
+    display: flex;
+
+    align-items: center;
+
+    gap: 10px;
+}
+
+.sub-avatar {
+    width: 35px;
+    height: 35px;
+
+    flex-shrink: 0;
+
+    border-radius: 9px;
+
+    background: #eef2ff;
+
+    color: #4f46e5;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    font-weight: 700;
+}
+
+.status {
+    display: inline-block;
+
+    padding: 5px 9px;
+
+    border-radius: 20px;
+
+    font-size: 11px;
+
+    font-weight: 600;
+}
+
+.status.active {
+    background: #dcfce7;
+    color: #16a34a;
+}
+
+.status.paused {
+    background: #fef3c7;
+    color: #d97706;
+}
+
+.status.cancelled {
+    background: #fee2e2;
+    color: #dc2626;
+}
+
+
+/* ================================
+   TABLE ACTION BUTTONS
+================================ */
+
+.action-btn,
+.delete-btn {
+    border: none;
+
+    padding: 7px 10px;
+
+    border-radius: 7px;
+
+    cursor: pointer;
+
+    font-size: 12px;
+
+    transition: 0.2s ease;
+}
+
+.action-btn {
+    background: #eef2ff;
+
+    color: #4f46e5;
+}
+
+.action-btn:hover {
+    background: #e0e7ff;
+
+    transform: translateY(-1px);
+}
+
+.delete-btn {
+    background: #fee2e2;
+
+    color: #dc2626;
+
+    margin-left: 4px;
+}
+
+.delete-btn:hover {
+    background: #fecaca;
+
+    transform: translateY(-1px);
+}
+
+.empty {
+    text-align: center;
+
+    color: #64748b;
+
+    padding: 40px;
+}
+
+
+/* ================================
+   ADD / EDIT SUBSCRIPTION MODAL
+================================ */
+
+.modal {
+    position: fixed;
+
+    inset: 0;
+
+    z-index: 1000;
+
+    display: none;
+
+    align-items: center;
+    justify-content: center;
+
+    padding: 24px;
+
+    background: rgba(15, 23, 42, 0.55);
+
+    backdrop-filter: blur(7px);
+}
+
+.modal.show {
+    display: flex;
+}
+
+
+/* Modal Box */
+
+.modal-card {
+    width: 100%;
+
+    max-width: 650px;
+
+    max-height: 90vh;
+
+    background: #ffffff;
+
+    border: 1px solid #e5e7eb;
+
+    border-radius: 20px;
+
+    padding: 30px;
+
+    box-shadow:
+        0 25px 70px rgba(15, 23, 42, 0.2);
+
+    overflow-y: auto;
+
+    animation: modalOpen 0.25s ease;
+}
+
+@keyframes modalOpen {
+
+    from {
+        opacity: 0;
+
+        transform:
+            translateY(20px)
+            scale(0.97);
+    }
+
+    to {
+        opacity: 1;
+
+        transform:
+            translateY(0)
+            scale(1);
+    }
+}
+
+
+/* Modal Header */
+
+.modal-header {
+    display: flex;
+
+    align-items: center;
+
+    justify-content: space-between;
+
+    margin-bottom: 26px;
+}
+
+.modal-header h2 {
+    margin: 0;
+
+    font-size: 24px;
+
+    font-weight: 700;
+
+    color: #111827;
+}
+
+.modal-header button {
+    width: 38px;
+    height: 38px;
+
+    border: none;
+
+    border-radius: 10px;
+
+    background: #f1f5f9;
+
+    color: #475569;
+
+    font-size: 23px;
+
+    line-height: 1;
+
+    cursor: pointer;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
+
+    transition: 0.2s ease;
+}
+
+.modal-header button:hover {
+    background: #e2e8f0;
+
+    color: #111827;
+
+    transform: rotate(90deg);
+}
+
+
+/* ================================
+   SUBSCRIPTION FORM
+================================ */
+
+#subscriptionForm {
+    display: grid;
+
+    grid-template-columns: 1fr 1fr;
+
+    column-gap: 18px;
+
+    row-gap: 18px;
+}
+
+#subscriptionForm label {
+    display: block;
+
+    margin: 0 0 7px;
+
+    color: #374151;
+
+    font-size: 13px;
+
+    font-weight: 600;
+}
+
+#subscriptionForm input,
+#subscriptionForm select,
+#subscriptionForm textarea {
+    width: 100%;
+
+    padding: 12px 14px;
+
+    box-sizing: border-box;
+
+    border: 1px solid #dbe1ea;
+
+    border-radius: 10px;
+
+    background: #ffffff;
+
+    color: #111827;
+
+    font-family: inherit;
+
+    font-size: 14px;
+
+    outline: none;
+
+    transition:
+        border-color 0.2s ease,
+        box-shadow 0.2s ease;
+}
+
+#subscriptionForm input:focus,
+#subscriptionForm select:focus,
+#subscriptionForm textarea:focus {
+    border-color: #4f46e5;
+
+    box-shadow:
+        0 0 0 3px rgba(79, 70, 229, 0.12);
+}
+
+#subscriptionForm input::placeholder,
+#subscriptionForm textarea::placeholder {
+    color: #9ca3af;
+}
+
+
+/* Notes */
+
+#subscriptionForm textarea {
+    grid-column: 1 / -1;
+
+    min-height: 90px;
+
+    resize: vertical;
+}
+
+
+/* Save Button */
+
+#subscriptionForm .primary-btn {
+    grid-column: 1 / -1;
+
+    width: 100%;
+
+    margin-top: 5px;
+
+    padding: 13px 20px;
+
+    border: none;
+
+    border-radius: 10px;
+
+    background: #4f46e5;
+
+    color: #ffffff;
+
+    font-family: inherit;
+
+    font-size: 14px;
+
+    font-weight: 600;
+
+    cursor: pointer;
+
+    transition: 0.2s ease;
+}
+
+#subscriptionForm .primary-btn:hover {
+    background: #4338ca;
+
+    transform: translateY(-1px);
+
+    box-shadow:
+        0 6px 15px rgba(79, 70, 229, 0.22);
+}
+
+#subscriptionForm .primary-btn:active {
+    transform: translateY(0);
+}
+
+
+/* Modal Scrollbar */
+
+.modal-card::-webkit-scrollbar {
+    width: 6px;
+}
+
+.modal-card::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+.modal-card::-webkit-scrollbar-thumb {
+    background: #cbd5e1;
+
+    border-radius: 10px;
+}
+
+.modal-card::-webkit-scrollbar-thumb:hover {
+    background: #94a3b8;
+}
+
+
+/* ================================
+   RESPONSIVE - 1100px
+================================ */
+
+@media (max-width: 1100px) {
+
+    .stats {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .dashboard-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+
+/* ================================
+   RESPONSIVE - 700px
+================================ */
+
+@media (max-width: 700px) {
+
+    .sidebar {
+        width: 70px;
+
+        padding: 20px 10px;
+    }
+
+    .sidebar-logo span,
+    .nav-item,
+    .logout-btn {
+        font-size: 0;
+    }
+
+    .main {
+        margin-left: 70px;
+
+        width: calc(100% - 70px);
+
+        padding: 20px;
+    }
+
+    .stats {
+        grid-template-columns: 1fr;
+    }
+
+    .topbar {
+        align-items: flex-start;
+
+        flex-direction: column;
+
+        gap: 15px;
+    }
+
+    .add-btn {
+        width: 100%;
+    }
+
+    #searchInput {
+        width: 100%;
+    }
+
+    .panel-header {
+        flex-direction: column;
+
+        align-items: flex-start;
+
+        gap: 15px;
+    }
+}
+
+
+/* ================================
+   RESPONSIVE - MODAL
+================================ */
+
+@media (max-width: 650px) {
+
+    .modal {
+        padding: 12px;
+
+        align-items: flex-end;
+    }
+
+    .modal-card {
+        max-height: 94vh;
+
+        padding: 22px;
+
+        border-radius: 20px 20px 0 0;
+    }
+
+    .modal-header h2 {
+        font-size: 21px;
+    }
+
+    #subscriptionForm {
+        grid-template-columns: 1fr;
+
+        gap: 16px;
+    }
+
+    #subscriptionForm textarea,
+    #subscriptionForm .primary-btn {
+        grid-column: auto;
+    }
+}
+
+/* ============================================
+   PAGE SECTIONS
+   ============================================ */
+
+.view-section {
+    display: none;
+}
+
+.view-section.active {
+    display: block;
+}

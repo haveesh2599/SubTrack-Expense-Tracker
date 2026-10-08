@@ -1,0 +1,551 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+>
+
+<title>SubTrack Dashboard</title>
+
+<link
+    rel="stylesheet"
+    href="css/dashboard.css"
+>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+</head>
+
+
+<body>
+
+
+<!-- SIDEBAR -->
+
+<aside class="sidebar">
+
+    <div class="sidebar-logo">
+
+        <div class="logo-small">
+            S
+        </div>
+
+        <span>SubTrack</span>
+
+    </div>
+
+
+    <nav>
+    <a
+        href="#dashboard"
+        class="nav-item active"
+        data-section="dashboard"
+    >
+        Dashboard
+    </a>
+
+    <a
+        href="#subscriptions"
+        class="nav-item"
+        data-section="subscriptions"
+    >
+        Subscriptions
+    </a>
+
+    <a
+        href="#analytics"
+        class="nav-item"
+        data-section="analytics"
+    >
+        Analytics
+    </a>
+</nav>
+    </nav>
+
+
+    <div class="sidebar-bottom">
+
+        <button
+            onclick="logout()"
+            class="logout-btn"
+        >
+            Logout
+        </button>
+
+    </div>
+
+</aside>
+
+
+<!-- MAIN -->
+
+<!-- MAIN -->
+<main class="main">
+
+    <!-- TOP BAR -->
+    <header class="topbar">
+
+        <div>
+
+            <p class="welcome-small">
+                Welcome back
+            </p>
+
+            <h1 id="userName">
+                Dashboard
+            </h1>
+
+        </div>
+
+
+        <button
+            class="add-btn"
+            onclick="openModal()"
+        >
+            + Add Subscription
+        </button>
+
+    </header>
+
+
+    <!-- ======================================== -->
+    <!-- DASHBOARD SECTION -->
+    <!-- ======================================== -->
+
+    <section
+        id="dashboardSection"
+        class="view-section active"
+    >
+
+        <!-- STAT CARDS -->
+        <section class="stats">
+
+
+            <!-- MONTHLY -->
+            <div class="stat-card">
+
+                <div class="stat-icon">
+                    ₹
+                </div>
+
+                <div>
+
+                    <p>
+                        Monthly Spending
+                    </p>
+
+                    <h2 id="monthlyTotal">
+                        ₹0
+                    </h2>
+
+                </div>
+
+            </div>
+
+
+            <!-- YEARLY -->
+            <div class="stat-card">
+
+                <div class="stat-icon">
+                    ₹
+                </div>
+
+                <div>
+
+                    <p>
+                        Yearly Spending
+                    </p>
+
+                    <h2 id="yearlyTotal">
+                        ₹0
+                    </h2>
+
+                </div>
+
+            </div>
+
+
+            <!-- ACTIVE -->
+            <div class="stat-card">
+
+                <div class="stat-icon">
+                    #
+                </div>
+
+                <div>
+
+                    <p>
+                        Active Subscriptions
+                    </p>
+
+                    <h2 id="activeCount">
+                        0
+                    </h2>
+
+                </div>
+
+            </div>
+
+
+            <!-- UPCOMING -->
+            <div class="stat-card">
+
+                <div class="stat-icon">
+                    !
+                </div>
+
+                <div>
+
+                    <p>
+                        Upcoming Payments
+                    </p>
+
+                    <h2 id="upcomingCount">
+                        0
+                    </h2>
+
+                </div>
+
+            </div>
+
+
+        </section>
+
+    </section>
+
+
+    <!-- ======================================== -->
+    <!-- SUBSCRIPTIONS SECTION -->
+    <!-- ======================================== -->
+
+    <section
+        id="subscriptionsSection"
+        class="view-section"
+    >
+
+        <section class="panel subscriptions-panel">
+
+
+            <div class="panel-header">
+
+                <div>
+
+                    <h2>
+                        Your Subscriptions
+                    </h2>
+
+                    <p>
+                        Manage your recurring expenses
+                    </p>
+
+                </div>
+
+
+                <input
+                    type="text"
+                    id="searchInput"
+                    placeholder="Search..."
+                    oninput="renderSubscriptions()"
+                >
+
+            </div>
+
+
+            <div class="table-container">
+
+                <table>
+
+                    <thead>
+
+                        <tr>
+
+                            <th>
+                                Subscription
+                            </th>
+
+                            <th>
+                                Category
+                            </th>
+
+                            <th>
+                                Price
+                            </th>
+
+                            <th>
+                                Billing
+                            </th>
+
+                            <th>
+                                Next Payment
+                            </th>
+
+                            <th>
+                                Status
+                            </th>
+
+                            <th>
+                                Action
+                            </th>
+
+                        </tr>
+
+                    </thead>
+
+
+                    <tbody id="subscriptionTable">
+
+                    </tbody>
+
+                </table>
+
+            </div>
+
+
+        </section>
+
+    </section>
+
+
+    <!-- ======================================== -->
+    <!-- ANALYTICS SECTION -->
+    <!-- ======================================== -->
+
+    <section
+        id="analyticsSection"
+        class="view-section"
+    >
+
+        <section class="dashboard-grid">
+
+
+            <!-- CHART -->
+            <div class="panel chart-panel">
+
+                <div class="panel-header">
+
+                    <div>
+
+                        <h2>
+                            Spending Overview
+                        </h2>
+
+                        <p>
+                            Monthly subscription expenses
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+                <canvas id="expenseChart"></canvas>
+
+            </div>
+
+
+            <!-- CATEGORY -->
+            <div class="panel">
+
+                <div class="panel-header">
+
+                    <div>
+
+                        <h2>
+                            Categories
+                        </h2>
+
+                        <p>
+                            Where your money goes
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+                <div id="categoryList">
+
+                </div>
+
+            </div>
+
+
+        </section>
+
+    </section>
+
+
+</main>
+
+
+<!-- MODAL -->
+
+<div
+    id="subscriptionModal"
+    class="modal"
+>
+
+<div class="modal-card">
+
+    <div class="modal-header">
+
+        <h2 id="modalTitle">
+            Add Subscription
+        </h2>
+
+        <button onclick="closeModal()">
+            ×
+        </button>
+
+    </div>
+
+
+    <form id="subscriptionForm">
+
+
+        <input
+            type="hidden"
+            id="subscriptionId"
+        >
+
+
+        <label>
+            Subscription Name
+        </label>
+
+        <input
+            type="text"
+            id="subName"
+            placeholder="Netflix"
+            required
+        >
+
+
+        <label>
+            Category
+        </label>
+
+        <select id="subCategory">
+
+            <option>Entertainment</option>
+            <option>Software</option>
+            <option>Music</option>
+            <option>Education</option>
+            <option>Cloud Storage</option>
+            <option>Gaming</option>
+            <option>Health</option>
+            <option>Other</option>
+
+        </select>
+
+
+        <label>
+            Price
+        </label>
+
+        <input
+            type="number"
+            id="subPrice"
+            min="0"
+            step="0.01"
+            placeholder="499"
+            required
+        >
+
+
+        <label>
+            Billing Cycle
+        </label>
+
+        <select id="subCycle">
+
+            <option value="Monthly">
+                Monthly
+            </option>
+
+            <option value="Yearly">
+                Yearly
+            </option>
+
+            <option value="Weekly">
+                Weekly
+            </option>
+
+        </select>
+
+
+        <label>
+            Start Date
+        </label>
+
+        <input
+            type="date"
+            id="startDate"
+            required
+        >
+
+
+        <label>
+            Next Payment
+        </label>
+
+        <input
+            type="date"
+            id="nextPayment"
+            required
+        >
+
+
+        <label>
+            Status
+        </label>
+
+        <select id="subStatus">
+
+            <option>Active</option>
+
+            <option>Paused</option>
+
+            <option>Cancelled</option>
+
+        </select>
+
+
+        <label>
+            Notes
+        </label>
+
+        <textarea
+            id="subNotes"
+            placeholder="Optional notes..."
+        ></textarea>
+
+
+        <button
+            type="submit"
+            class="primary-btn"
+        >
+            Save Subscription
+        </button>
+
+    </form>
+
+</div>
+
+</div>
+
+
+<script src="js/supabase.js"></script>
+<script src="js/dashboard.js"></script>
+
+</body>
+
+</html>
